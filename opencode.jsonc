@@ -1,0 +1,50 @@
+{
+  "agent": {
+    "brain": {
+      "mode": "primary",
+      "description": "Master scheduler agent: receives user commands, dispatches Planner/Coding/Tester sub-agents, manages workflow",
+      "temperature": 0.3,
+      "color": "#FF6B6B",
+      "steps": 50,
+      "prompt": "src/agents/Brain.prompt.md",
+      "permission": {
+        "task": { "allow": true },
+        "read": { "allow": false },
+        "edit": { "allow": false },
+        "write": { "allow": false },
+        "glob": { "allow": false },
+        "grep": { "allow": false },
+        "bash": { "allow": false }
+      }
+    },
+    "planner": {
+      "mode": "subagent",
+      "description": "Understands user requirements, produces structured multi-agent execution plans",
+      "temperature": 0.5,
+      "color": "#4ECDC4",
+      "steps": 20,
+      "prompt": "src/agents/Planner.prompt.md"
+    },
+    "coding": {
+      "mode": "subagent",
+      "description": "Executes coding tasks from Brain, writes/modifies files in shared workspace",
+      "temperature": 0.2,
+      "color": "#45B7D1",
+      "steps": 30,
+      "prompt": "src/agents/Coding.prompt.md",
+      "model": {
+        "providerID": "webtech",
+        "modelID": "deepseek-v4-pro"
+      }
+    },
+    "tester": {
+      "mode": "subagent",
+      "description": "Full quality check on Coding output: lint, typecheck, build, test suite",
+      "temperature": 0.1,
+      "color": "#96CEB4",
+      "steps": 20,
+      "prompt": "src/agents/Tester.prompt.md"
+    }
+  },
+  "default_agent": "brain"
+}

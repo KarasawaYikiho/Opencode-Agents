@@ -1,0 +1,38 @@
+{
+  "name": "opencode-agents",
+  "version": "1.0.0",
+  "description": "Multi-agent orchestration plugin for OpenCode — Brain dispatches Planner/Coding/Tester in a plan-first validator-gated loop",
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist/",
+    "src/agents/",
+    "opencode.jsonc",
+    "install.sh",
+    "install.ps1",
+    "uninstall.sh"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0",
+    "@types/node": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "license": "MIT",
+  "keywords": ["opencode", "plugin", "multi-agent", "orchestration"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KarasawaYikiho/Opencode-Agents.git"
+  }
+}
