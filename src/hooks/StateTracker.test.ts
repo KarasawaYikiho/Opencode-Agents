@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { StateTracker } from "./state-tracker.js";
+import { StateTracker } from "./StateTracker.js";
 import { mkdtempSync, rmSync, existsSync, readFileSync } from "fs";
 import { join } from "path";
 import { tmpdir } from "os";
-import type { StepState } from "../types.js";
+import type { StepState } from "../Types.js";
 
 let tracker: StateTracker;
 let tmpDir: string;
@@ -40,13 +40,13 @@ describe("StateTracker", () => {
     tracker.save();
 
     const tracker2 = new StateTracker(tmpDir);
-    const loaded = tracker2.load("session-1");
+    const loaded = tracker2.load();
     expect(loaded).not.toBeNull();
     expect(loaded!.sessionID).toBe("session-1");
   });
 
-  it("should return null for nonexistent session", () => {
-    const loaded = tracker.load("nonexistent");
+  it("should return null when no state exists", () => {
+    const loaded = tracker.load();
     expect(loaded).toBeNull();
   });
 
@@ -61,7 +61,7 @@ describe("StateTracker", () => {
     tracker.setCurrentStep(step);
     tracker.save();
 
-    const loaded = tracker.load("session-1")!;
+    const loaded = tracker.load()!;
     expect(loaded.currentStep.stepIndex).toBe(1);
     expect(loaded.currentStep.codingTaskId).toBe("task-abc");
   });
@@ -99,7 +99,7 @@ describe("StateTracker", () => {
     tracker.init("session-1");
     tracker.save();
     tracker.clear();
-    const loaded = tracker.load("session-1");
+    const loaded = tracker.load();
     expect(loaded).toBeNull();
   });
 });

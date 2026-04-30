@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { RetryGuard } from "./retry-guard.js";
+import { RetryGuard } from "./RetryGuard.js";
 
 describe("RetryGuard", () => {
   let guard: RetryGuard;

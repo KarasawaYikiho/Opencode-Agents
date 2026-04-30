@@ -61,9 +61,9 @@ npm test
 
 - `index.ts` — Plugin entry point, registers hooks
 - `src/agents/*.prompt.md` — Agent system prompts (orchestration logic + behavior)
-- `src/hooks/retry-guard.ts` — Enforces max retry limit (default: 3)
-- `src/hooks/state-tracker.ts` — Persists orchestration state to disk
-- `src/types.ts` — Shared TypeScript interfaces
+- `src/hooks/RetryGuard.ts` — Enforces max retry limit (default: 3)
+- `src/hooks/StateTracker.ts` — Persists orchestration state to disk
+- `src/Types.ts` — Shared TypeScript interfaces
 
 ## License
 

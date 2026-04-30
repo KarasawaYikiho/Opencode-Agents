@@ -6,7 +6,7 @@
       "temperature": 0.3,
       "color": "#FF6B6B",
       "steps": 50,
-      "prompt": "src/agents/brain.prompt.md",
+      "prompt": "src/agents/Brain.prompt.md",
       "permission": {
         "task": { "allow": true },
         "read": { "allow": false },
@@ -23,7 +23,7 @@
       "temperature": 0.5,
       "color": "#4ECDC4",
       "steps": 20,
-      "prompt": "src/agents/planner.prompt.md"
+      "prompt": "src/agents/Planner.prompt.md"
     },
     "coding": {
       "mode": "subagent",
@@ -31,7 +31,7 @@
       "temperature": 0.2,
       "color": "#45B7D1",
       "steps": 30,
-      "prompt": "src/agents/coding.prompt.md",
+      "prompt": "src/agents/Coding.prompt.md",
       "model": {
         "providerID": "webtech",
         "modelID": "deepseek-v4-pro"
@@ -43,7 +43,7 @@
       "temperature": 0.1,
       "color": "#96CEB4",
       "steps": 20,
-      "prompt": "src/agents/tester.prompt.md"
+      "prompt": "src/agents/Tester.prompt.md"
     }
   },
   "default_agent": "brain"

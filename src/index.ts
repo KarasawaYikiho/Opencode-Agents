@@ -1,8 +1,12 @@
 import type { Plugin, Hooks } from "@opencode-ai/plugin";
-import { RetryGuard } from "./hooks/retry-guard.js";
+import { RetryGuard } from "./hooks/RetryGuard.js";
 
 const MAX_RETRIES_PER_STEP = 3;
 const MAX_CODING_CALLS_PER_SESSION = 50;
+
+function getAgentName(args: any): string | undefined {
+  return args?.agent ?? args?.name ?? args?.subagent_type;
+}
 
 const plugin: Plugin = async (_input) => {
   const retryGuard = new RetryGuard(MAX_RETRIES_PER_STEP);
@@ -10,9 +14,7 @@ const plugin: Plugin = async (_input) => {
   const hooks: Hooks = {
     "tool.execute.before": async (ctx, output) => {
       if (ctx.tool === "task") {
-        const args = output.args;
-        const agentName: string | undefined =
-          args?.agent ?? args?.name ?? args?.subagent_type;
+        const agentName = getAgentName(output.args);
 
         if (agentName === "coding") {
           const stepKey = `session:${ctx.sessionID}`;
@@ -38,9 +40,7 @@ const plugin: Plugin = async (_input) => {
 
     "tool.execute.after": async (ctx, output) => {
       if (ctx.tool === "task") {
-        const args = ctx.args;
-        const agentName: string | undefined =
-          args?.agent ?? args?.name ?? args?.subagent_type;
+        const agentName = getAgentName(ctx.args);
 
         if (agentName === "coding") {
           const stepKey = `session:${ctx.sessionID}`;

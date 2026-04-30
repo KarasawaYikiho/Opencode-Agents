@@ -1,6 +1,6 @@
 import { writeFileSync, readFileSync, existsSync, unlinkSync } from "fs";
 import { join } from "path";
-import type { SessionState, StepState } from "../types.js";
+import type { SessionState, StepState } from "../Types.js";
 
 const STATE_FILE = "state.json";
 
@@ -22,7 +22,7 @@ export class StateTracker {
     return this.state;
   }
 
-  load(sessionID: string): SessionState | null {
+  load(): SessionState | null {
     const filePath = this.getPath();
     if (!existsSync(filePath)) return null;
     try {
