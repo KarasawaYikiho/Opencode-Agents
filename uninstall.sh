@@ -18,6 +18,6 @@ fi
 # 2. Restore default agent
 echo ""
 echo "Uninstall complete. Manual steps:"
-echo " 1. Remove 'brain', 'planner', 'coding', 'tester' blocks from your opencode.jsonc agent section"
+echo " 1. Remove 'Brain', 'Planner', 'Coding', 'Tester' blocks from your opencode.jsonc agent section"
 echo " 2. Set \"default_agent\" back to \"build\" in opencode.jsonc"
 echo " 3. Remove the 'opencode-agents' entry from your plugins directory"

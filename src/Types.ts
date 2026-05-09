@@ -45,15 +45,3 @@ export interface SessionState {
   /** When this state was last updated (ISO string) */
   lastUpdated: string;
 }
-
-export interface CodingResult {
-  files: Array<{ path: string; action: "created" | "modified" }>;
-  summary: string;
-}
-
-export interface TesterResult {
-  result: "pass" | "fail";
-  summary: string;
-  details: Array<{ item: string; status: "pass" | "fail" | "na"; detail: string }>;
-  failReason?: string;
-}

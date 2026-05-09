@@ -4,19 +4,30 @@ import { RetryGuard } from "./hooks/RetryGuard.js";
 const MAX_RETRIES_PER_STEP = 3;
 const MAX_CODING_CALLS_PER_SESSION = 50;
 
+const BRAIN_ENFORCEMENT_TEXT = `
+[PLUGIN ENFORCEMENT — BRAIN ORCHESTRATOR]
+你正在以 Brain Agent（纯调度器）身份运行。
+- 你绝不能直接输出代码、解决方案、或技术实现内容。
+- 你的第一个行动必须是调用 Task(subagent_type="Planner", ...)。
+- 你的回复只包含调度信息和状态汇报。
+- 如果你违反以上规则，你的输出将被视为失败。
+[/PLUGIN ENFORCEMENT]
+`.trim();
+
 function getAgentName(args: any): string | undefined {
   return args?.agent ?? args?.name ?? args?.subagent_type;
 }
 
 const plugin: Plugin = async (_input) => {
   const retryGuard = new RetryGuard(MAX_RETRIES_PER_STEP);
+  const sessionAgents = new Map<string, string>();
 
   const hooks: Hooks = {
     "tool.execute.before": async (ctx, output) => {
       if (ctx.tool === "task") {
         const agentName = getAgentName(output.args);
 
-        if (agentName === "coding") {
+        if (agentName === "Coding") {
           const stepKey = `session:${ctx.sessionID}`;
           const count = retryGuard.getCount(stepKey);
 
@@ -42,14 +53,14 @@ const plugin: Plugin = async (_input) => {
       if (ctx.tool === "task") {
         const agentName = getAgentName(ctx.args);
 
-        if (agentName === "coding") {
+        if (agentName === "Coding") {
           const stepKey = `session:${ctx.sessionID}`;
           console.log(
             `[opencode-agents] Coding call #${retryGuard.getCount(stepKey)} completed for ${ctx.sessionID}`
           );
         }
 
-        if (agentName === "tester") {
+        if (agentName === "Tester") {
           const testerOutput = output.output ?? "";
           const hasPass = /RESULT:\s*pass/i.test(testerOutput);
           const stepKey = `session:${ctx.sessionID}`;
@@ -69,7 +80,20 @@ const plugin: Plugin = async (_input) => {
     "tool.definition": async (ctx, output) => {
       if (ctx.toolID === "task") {
         output.description +=
-          " Use this to dispatch sub-agents: planner (for planning), coding (for implementation), tester (for verification).";
+          " Use this to dispatch sub-agents: Planner (for planning), Coding (for implementation), Tester (for verification).";
+      }
+    },
+
+    "chat.message": async (input, _output) => {
+      const agent = input.agent ?? "Brain";
+      sessionAgents.set(input.sessionID, agent);
+    },
+
+    "experimental.chat.system.transform": async (input, output) => {
+      if (!input.sessionID) return;
+      const agent = sessionAgents.get(input.sessionID) ?? "Brain";
+      if (agent === "Brain") {
+        output.system.push(BRAIN_ENFORCEMENT_TEXT);
       }
     },
   };

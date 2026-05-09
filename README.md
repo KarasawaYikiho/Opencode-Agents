@@ -39,7 +39,7 @@ cd Opencode-Agents
 ./install.sh
 ```
 
-Then manually merge the agent definitions from `opencode.jsonc` into your `~/.config/opencode/opencode.jsonc` and set `"default_agent": "brain"`.
+Then manually merge the agent definitions from `opencode.jsonc` into your `~/.config/opencode/opencode.jsonc` and set `"default_agent": "Brain"`.
 
 ## Uninstall
 
@@ -60,7 +60,7 @@ npm test
 ## Architecture
 
 - `index.ts` — Plugin entry point, registers hooks
-- `src/agents/*.prompt.md` — Agent system prompts (orchestration logic + behavior)
+- `src/agents/*.md` — Agent system prompts (orchestration logic + behavior)
 - `src/hooks/RetryGuard.ts` — Enforces max retry limit (default: 3)
 - `src/hooks/StateTracker.ts` — Persists orchestration state to disk
 - `src/Types.ts` — Shared TypeScript interfaces

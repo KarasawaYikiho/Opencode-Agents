@@ -24,13 +24,13 @@ Write-Host "Copied agent prompts to $OpencodeAgentsDir" -ForegroundColor Green
 
 # 3. Install npm dependencies and build
 Write-Host "Installing dependencies and building..." -ForegroundColor Yellow
-npm install --production
+npm install
 npm run build
 Write-Host "Dependencies installed and build complete" -ForegroundColor Green
 
 # 4. Merge agent config
 Write-Host "To complete setup, add the agent definitions from opencode.jsonc to your opencode.jsonc"
-Write-Host "and set `"default_agent`": `"brain`"" -ForegroundColor Yellow
+Write-Host "and set `"default_agent`": `"Brain`"" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "Your config is at: $OpencodeConfigFile" -ForegroundColor Cyan
 Write-Host "Backup file at: $BackupFile" -ForegroundColor Cyan

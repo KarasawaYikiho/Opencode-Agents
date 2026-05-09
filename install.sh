@@ -25,10 +25,10 @@ echo "Copied agent prompts to $OPENCODE_AGENTS_DIR"
 
 # 3. Install npm dependencies
 echo "Installing dependencies..."
-npm install --production
+npm install
 echo "Dependencies installed"
 
-# 4. Build TypeScript
+# 3. Build TypeScript
 echo "Building..."
 npm run build
 echo "Build complete"
@@ -36,7 +36,7 @@ echo "Build complete"
 # 5. Instructions
 echo ""
 echo "To complete setup, add the agent definitions from opencode.jsonc to your opencode.jsonc"
-echo "and set \"default_agent\": \"brain\""
+echo "and set \"default_agent\": \"Brain\""
 echo ""
 echo "Your config is at: $OPENCODE_CONFIG_FILE"
 echo "Backup file at: $BACKUP_FILE"
