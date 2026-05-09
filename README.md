@@ -44,6 +44,10 @@ Then manually merge the agent definitions from `opencode.jsonc` into your `~/.co
 ## Uninstall
 
 ```bash
+# Windows
+.\uninstall.ps1
+
+# Linux/macOS
 ./uninstall.sh
 ```
 

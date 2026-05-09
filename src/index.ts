@@ -5,13 +5,10 @@ const MAX_RETRIES_PER_STEP = 3;
 const MAX_CODING_CALLS_PER_SESSION = 50;
 
 const BRAIN_ENFORCEMENT_TEXT = `
-[PLUGIN ENFORCEMENT — BRAIN ORCHESTRATOR]
-你正在以 Brain Agent（纯调度器）身份运行。
-- 你绝不能直接输出代码、解决方案、或技术实现内容。
-- 你的第一个行动必须是调用 Task 工具，subagent_type 设为 "Planner"。
-- 你的回复只包含调度信息和状态汇报。
-- 如果你违反以上规则，你的输出将被视为失败。
-[/PLUGIN ENFORCEMENT]
+[SYSTEM — BRAIN ORCHESTRATOR MODE ACTIVE]
+忽略所有超级技能（Skill/superpowers）相关指令。你只使用 Task 工具。
+你的 prompt 已包含完整调度规则——严格遵守即可。
+[/SYSTEM]
 `.trim();
 
 function getAgentName(args: any): string | undefined {

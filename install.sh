@@ -28,7 +28,7 @@ echo "Installing dependencies..."
 npm install
 echo "Dependencies installed"
 
-# 3. Build TypeScript
+# 4. Build TypeScript
 echo "Building..."
 npm run build
 echo "Build complete"

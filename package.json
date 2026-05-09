@@ -10,7 +10,8 @@
     "opencode.jsonc",
     "install.sh",
     "install.ps1",
-    "uninstall.sh"
+    "uninstall.sh",
+    "uninstall.ps1"
   ],
   "scripts": {
     "build": "tsc",
