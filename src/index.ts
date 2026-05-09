@@ -8,7 +8,7 @@ const BRAIN_ENFORCEMENT_TEXT = `
 [PLUGIN ENFORCEMENT — BRAIN ORCHESTRATOR]
 你正在以 Brain Agent（纯调度器）身份运行。
 - 你绝不能直接输出代码、解决方案、或技术实现内容。
-- 你的第一个行动必须是调用 Task(subagent_type="Planner", ...)。
+- 你的第一个行动必须是调用 Task 工具，subagent_type 设为 "Planner"。
 - 你的回复只包含调度信息和状态汇报。
 - 如果你违反以上规则，你的输出将被视为失败。
 [/PLUGIN ENFORCEMENT]
@@ -91,7 +91,7 @@ const plugin: Plugin = async (_input) => {
 
     "experimental.chat.system.transform": async (input, output) => {
       if (!input.sessionID) return;
-      const agent = sessionAgents.get(input.sessionID) ?? "Brain";
+      const agent = sessionAgents.get(input.sessionID);
       if (agent === "Brain") {
         output.system.push(BRAIN_ENFORCEMENT_TEXT);
       }
